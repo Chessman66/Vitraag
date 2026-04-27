@@ -98,21 +98,14 @@ export default function Navbar() {
               dropdownItems={[
                 { name: "About Sangh", to: "/about" },
                 { name: "Management Committee", to: "/management" },
-                { name: "Subcommittee Members", to: "/subcommittee" }
+                { name: "Subcommittee Members", to: "/subcommittee" },
+                { name: "Photo Gallery", to: "/gallery" }
               ]}
             >
               About Us
             </NavLink>
             <NavLink to="/activities">Activities</NavLink>
-            <NavLink 
-              to="/events"
-              dropdownItems={[
-                { name: "Upcoming Events", to: "/events" },
-                { name: "Past Events", to: "/events?tab=past" }
-              ]}
-            >
-              Events
-            </NavLink>
+            <NavLink to="/events">Events</NavLink>
             <NavLink to="/blogs">Blogs</NavLink>
             <NavLink to="/contact">Contact Us</NavLink>
           </div>
@@ -126,15 +119,28 @@ export default function Navbar() {
               <Heart className="w-4 h-4" />
               Donate Now
             </Link>
-            <Link 
-              to="/login"
-              className={cn(
-                "p-2 rounded-full border transition-all",
-                isScrolled ? "border-slate-200 text-slate-600 hover:bg-cream" : "border-white/20 text-white hover:bg-white/10"
-              )}
-            >
-              <User className="w-5 h-5" />
-            </Link>
+            {localStorage.getItem("isVitraagLoggedIn") === "true" ? (
+              <Link 
+                to="/profile"
+                className={cn(
+                  "p-2 rounded-full border transition-all flex items-center gap-2 px-3",
+                  isScrolled ? "border-slate-200 text-slate-600 hover:bg-cream" : "border-white/20 text-white hover:bg-white/10"
+                )}
+              >
+                <div className="w-6 h-6 rounded-full bg-brand-secondary flex items-center justify-center text-[10px] text-white font-bold">AS</div>
+                <span className="text-xs font-bold">Profile</span>
+              </Link>
+            ) : (
+              <Link 
+                to="/login"
+                className={cn(
+                  "p-2 rounded-full border transition-all",
+                  isScrolled ? "border-slate-200 text-slate-600 hover:bg-cream" : "border-white/20 text-white hover:bg-white/10"
+                )}
+              >
+                <User className="w-5 h-5" />
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -147,7 +153,31 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Container omitted for brevity, adding in next step if needed */}
+      {/* Mobile Menu Container */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-white border-t border-slate-100 overflow-hidden"
+          >
+            <div className="p-4 space-y-2">
+              <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block p-3 text-slate-600 font-bold hover:text-brand-primary">Home</Link>
+              <Link to="/about" onClick={() => setIsMobileMenuOpen(false)} className="block p-3 text-slate-600 font-bold hover:text-brand-primary">About Us</Link>
+              <Link to="/activities" onClick={() => setIsMobileMenuOpen(false)} className="block p-3 text-slate-600 font-bold hover:text-brand-primary">Activities</Link>
+              <Link to="/events" onClick={() => setIsMobileMenuOpen(false)} className="block p-3 text-slate-600 font-bold hover:text-brand-primary">Events</Link>
+              <Link to="/blogs" onClick={() => setIsMobileMenuOpen(false)} className="block p-3 text-slate-600 font-bold hover:text-brand-primary">Blogs</Link>
+              <Link to="/gallery" onClick={() => setIsMobileMenuOpen(false)} className="block p-3 text-slate-600 font-bold hover:text-brand-primary">Gallery</Link>
+              <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} className="block p-3 text-slate-600 font-bold hover:text-brand-primary">Contact Us</Link>
+              <div className="pt-4 flex flex-col gap-3">
+                 <Link to="/donations" onClick={() => setIsMobileMenuOpen(false)} className="bg-brand-accent text-white p-4 rounded-2xl text-center font-bold">Donate Now</Link>
+                 <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="bg-cream text-brand-primary p-4 rounded-2xl text-center font-bold">Member Login</Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

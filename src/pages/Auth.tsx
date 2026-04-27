@@ -37,7 +37,11 @@ export default function Auth({ type = "login" }: { type?: "login" | "register" }
             </p>
           </div>
 
-          <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); navigate("/"); }}>
+          <form className="space-y-6" onSubmit={(e) => { 
+            e.preventDefault(); 
+            localStorage.setItem("isVitraagLoggedIn", "true");
+            window.location.href = "/profile"; 
+          }}>
             {type === "register" && (
               <input type="text" placeholder="Full Name" className="w-full px-6 py-4 bg-cream rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-secondary/20 transition-all border border-transparent focus:bg-white" />
             )}

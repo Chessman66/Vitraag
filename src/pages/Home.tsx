@@ -4,58 +4,84 @@ import { Link } from "react-router-dom";
 import { cn } from "@/src/lib/utils";
 
 const Hero = () => (
-  <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
+  <section className="relative h-screen flex items-center justify-center overflow-hidden">
     <div className="absolute inset-0 z-0">
-      <img 
+      <motion.img 
+        initial={{ scale: 1.1 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 10 }}
         src="https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=2673&auto=format&fit=crop" 
         alt="Temple Background" 
-        className="w-full h-full object-cover brightness-50"
+        className="w-full h-full object-cover brightness-[0.3]"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-brand-primary/40 via-transparent to-cream" />
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-primary/40 via-transparent to-brand-primary/80" />
     </div>
     
-    <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+    <div className="relative z-10 text-center px-4 max-w-5xl mx-auto space-y-12">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 1 }}
+        className="space-y-6"
       >
-        <h2 className="heading-serif text-white text-2xl md:text-4xl mb-6 leading-relaxed italic">
-          "It is better to win over self than to<br className="hidden md:block" /> win over a million enemies"
-        </h2>
-        <div className="w-24 h-0.5 bg-brand-secondary mx-auto mb-8" />
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-brand-secondary text-white px-8 py-3 rounded-full font-bold shadow-lg hover:bg-brand-secondary/90 transition-all flex items-center gap-2 mx-auto"
-        >
-          Join with us
-          <ArrowRight className="w-4 h-4" />
-        </motion.button>
+        <span className="text-brand-secondary font-bold uppercase tracking-[0.5em] text-[10px]">Vitraag Jain Shwetambar Sangh</span>
+        <h1 className="text-5xl md:text-8xl font-bold text-white italic font-serif leading-tight">
+          Ahimsa Parmo Dharma
+        </h1>
+        <div className="w-24 h-1 bg-brand-secondary mx-auto rounded-full" />
+        <p className="text-white/80 text-lg md:text-2xl font-light italic font-serif max-w-2xl mx-auto">
+          "Where non-violence is the ultimate path to peace and liberation."
+        </p>
+      </motion.div>
+      
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.8 }}
+        className="flex flex-col sm:flex-row items-center justify-center gap-6"
+      >
+        <Link to="/about" className="bg-brand-secondary text-white px-10 py-5 rounded-[2rem] font-bold uppercase tracking-[0.3em] text-[10px] hover:shadow-2xl hover:shadow-brand-secondary/40 transition-all flex items-center gap-3 group active:scale-95 shadow-xl">
+          Explore Our Heritage
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </Link>
+        <Link to="/events" className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-10 py-5 rounded-[2rem] font-bold uppercase tracking-[0.3em] text-[10px] hover:bg-white hover:text-brand-primary transition-all active:scale-95">
+          Upcoming Events
+        </Link>
       </motion.div>
     </div>
+
+    <motion.div 
+      animate={{ y: [0, 10, 0] }}
+      transition={{ repeat: Infinity, duration: 2 }}
+      className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+    >
+       <div className="w-[1px] h-12 bg-gradient-to-b from-white/60 to-transparent" />
+       <span className="text-[10px] uppercase tracking-widest text-white/40">Scroll Down</span>
+    </motion.div>
   </section>
 );
 
 const Features = () => {
   const cards = [
-    { title: "About Sangh", desc: "A brief history and vision of our community.", icon: <Users className="w-6 h-6 text-white" />, color: "bg-brand-primary" },
-    { title: "Pratishtha", desc: "Learn about the sacred consecration ceremonies.", icon: <Heart className="w-6 h-6 text-brand-primary" />, color: "bg-white" },
-    { title: "Pathshala", desc: "Spiritual education programs for all ages.", icon: <Calendar className="w-6 h-6 text-brand-primary" />, color: "bg-white" },
+    { title: "Sacred Heritage", desc: "A brief history and vision of our community, rooted in ancient Shwetambar traditions.", icon: "🕉️", color: "bg-brand-primary" },
+    { title: "Pratishtha", desc: "Learn about the sacred consecration ceremonies and our beautiful temple architecture.", icon: "🏛️", color: "bg-white" },
+    { title: "Pathshala", desc: "Spiritual education programs for children and adults to preserve our cultural legacy.", icon: "📚", color: "bg-white" },
   ];
 
   return (
-    <section className="py-24 px-4 bg-cream overflow-hidden">
+    <section className="py-32 px-4 bg-cream relative overflow-hidden">
+      <div className="absolute -top-24 -left-24 w-96 h-96 bg-brand-primary/5 rounded-full blur-3xl" />
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <span className="text-brand-secondary text-xs font-bold uppercase tracking-[0.2em] mb-4 block">Welcome</span>
-          <h2 className="text-3xl md:text-5xl font-bold text-brand-primary mb-6">Experience Vitraag at Jain Shwetambar Sangh</h2>
-          <p className="text-slate-600 max-w-2xl mx-auto text-sm leading-relaxed">
+        <div className="text-center mb-24 space-y-6">
+          <span className="text-brand-secondary text-[10px] font-bold uppercase tracking-[0.4em] block">Our Offerings</span>
+          <h2 className="text-4xl md:text-7xl font-bold text-brand-primary italic font-serif">Experience Vitraag</h2>
+          <div className="w-24 h-1 bg-brand-secondary mx-auto rounded-full" />
+          <p className="text-slate-600 max-w-2xl mx-auto text-sm md:text-lg leading-relaxed font-light">
             Founded with a vision to unite the Jain community in Sydney, our Sangh focuses on spiritual growth, community service, and traditional values.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {cards.map((card, i) => (
             <motion.div
               key={i}
@@ -64,23 +90,23 @@ const Features = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               className={cn(
-                "p-10 rounded-2xl shadow-xl flex flex-col items-center text-center group cursor-pointer transition-all hover:-translate-y-2",
-                card.color === "bg-brand-primary" ? "text-white" : "text-brand-primary"
+                "p-12 rounded-[3rem] shadow-2xl flex flex-col items-center text-center group transition-all duration-500 hover:-translate-y-4 border border-transparent",
+                card.color === "bg-brand-primary" ? "bg-brand-primary text-white" : "bg-white text-brand-primary border-slate-50"
               )}
             >
               <div className={cn(
-                "w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-md transition-transform group-hover:scale-110",
-                card.color === "bg-brand-primary" ? "bg-white/10" : "bg-cream border border-brand-primary"
+                "w-20 h-20 rounded-[1.5rem] flex items-center justify-center mb-8 shadow-xl transition-transform group-hover:rotate-3 group-hover:scale-110",
+                card.color === "bg-brand-primary" ? "bg-white/10" : "bg-cream"
               )}>
-                {card.icon}
+                <span className="text-4xl">{card.icon}</span>
               </div>
-              <h3 className="text-xl font-bold mb-4">{card.title}</h3>
-              <p className={cn("text-sm leading-relaxed mb-6", card.color === "bg-brand-primary" ? "text-white/70" : "text-slate-600")}>
+              <h3 className="text-2xl font-bold mb-4 italic font-serif">{card.title}</h3>
+              <p className={cn("text-sm leading-relaxed mb-8 font-medium", card.color === "bg-brand-primary" ? "text-white/60" : "text-slate-500")}>
                 {card.desc}
               </p>
-              <div className="flex items-center gap-1 text-xs font-bold uppercase tracking-widest group-hover:gap-3 transition-all">
-                Learn More <ChevronRight className="w-4 h-4" />
-              </div>
+              <Link to="/about" className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.3em] group-hover:gap-5 transition-all">
+                Learn More <ArrowRight className="w-4 h-4" />
+              </Link>
             </motion.div>
           ))}
         </div>
@@ -91,39 +117,62 @@ const Features = () => {
 
 const ProgramSection = () => {
   const programs = [
-    { title: "The Yoga Program", desc: "A holistic approach to mental and physical well-being through Jain principles.", img: "https://images.unsplash.com/photo-1544367567-002fcb03541f?q=80&w=2720&auto=format&fit=crop" },
-    { title: "Sahaj Samadhi Meditation", desc: "A journey into silence and inner peace.", img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=2599&auto=format&fit=crop" },
-    { title: "Advanced Meditation Program", desc: "For those looking to deepen their spiritual practice.", img: "https://images.unsplash.com/photo-1528319725582-ddc096101511?q=80&w=2636&auto=format&fit=crop" },
+    { title: "The Yoga Program", desc: "A holistic approach to mental and physical well-being through Jain principles of mindfulness.", img: "https://images.unsplash.com/photo-1544367567-002fcb03541f?q=80&w=2720&auto=format&fit=crop", icon: "🧘" },
+    { title: "Sahaj Samadhi Meditation", desc: "A journey into silence and inner peace, following the path of the Tirthankaras.", img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=2599&auto=format&fit=crop", icon: "✨" },
+    { title: "Advanced Retreats", desc: "For those looking to deepen their spiritual practice in a tranquil environment.", img: "https://images.unsplash.com/photo-1528319725582-ddc096101511?q=80&w=2636&auto=format&fit=crop", icon: "🏔️" },
   ];
 
   return (
-    <section className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="text-center mb-20">
-          <span className="text-brand-secondary text-xs font-bold uppercase tracking-widest mb-4 block">Programs</span>
-          <h2 className="text-3xl md:text-5xl font-bold text-brand-primary">Meditation, Yoga, Retreats & More...</h2>
+    <section className="py-40 bg-white">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="text-center mb-32 space-y-6">
+          <span className="text-brand-secondary text-[10px] font-bold uppercase tracking-[0.4em] block">Our Programs</span>
+          <h2 className="text-4xl md:text-7xl font-bold text-brand-primary italic font-serif">Meditation & More</h2>
+          <div className="w-24 h-1 bg-brand-secondary mx-auto rounded-full" />
         </div>
 
-        <div className="space-y-32">
+        <div className="space-y-48">
           {programs.map((prog, i) => (
-            <div key={i} className={cn("flex flex-col gap-12 items-center", i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row")}>
-              <div className="w-full md:w-1/2 relative">
-                <div className="aspect-[16/10] overflow-hidden rounded-2xl shadow-2xl">
-                  <img src={prog.img} alt={prog.title} className="w-full h-full object-cover hover:scale-110 transition-transform duration-700" />
+            <motion.div 
+              key={i} 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className={cn("flex flex-col gap-20 items-center", i % 2 === 1 ? "lg:flex-row-reverse" : "lg:flex-row")}
+            >
+              <div className="w-full lg:w-1/2 relative">
+                <div className="aspect-[16/10] overflow-hidden rounded-[3rem] shadow-2xl relative z-10">
+                  <img src={prog.img} alt={prog.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-[2s]" />
+                  <div className="absolute inset-0 bg-brand-primary/5" />
                 </div>
-                <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-brand-secondary/10 rounded-full -z-10" />
+                <div className="absolute -top-10 -left-10 w-40 h-40 bg-brand-secondary/5 rounded-full blur-2xl -z-10" />
+                <div className={cn("absolute -bottom-10 w-64 h-64 bg-cream rounded-[3rem] -z-10", i % 2 === 1 ? "-left-10" : "-right-10")} />
               </div>
-              <div className="w-full md:w-1/2 space-y-6 md:px-12">
-                <div className="w-12 h-1 bg-brand-secondary mb-4" />
-                <h3 className="text-2xl md:text-4xl font-bold text-brand-primary">{prog.title}</h3>
-                <p className="text-slate-600 leading-relaxed text-sm md:text-base">
+              
+              <div className="w-full lg:w-1/2 space-y-10 lg:px-12">
+                <div className="flex items-center gap-6">
+                   <span className="text-5xl">{prog.icon}</span>
+                   <div className="w-12 h-[1px] bg-brand-secondary" />
+                </div>
+                <h3 className="text-3xl md:text-6xl font-bold text-brand-primary italic font-serif leading-tight">{prog.title}</h3>
+                <p className="text-slate-500 leading-relaxed text-sm md:text-lg font-medium">
                   {prog.desc} our programs are designed to help you find balance in the modern world while staying true to the ancient wisdom of Jainism.
                 </p>
-                <button className="text-brand-secondary font-bold uppercase text-[10px] tracking-[0.3em] flex items-center gap-2 group">
-                  Learn More <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+                <div className="grid grid-cols-2 gap-8 py-4">
+                   <div className="space-y-2">
+                      <p className="text-[10px] font-bold text-brand-secondary uppercase tracking-widest">Duration</p>
+                      <p className="text-sm font-bold text-brand-primary italic font-serif">Variable</p>
+                   </div>
+                   <div className="space-y-2">
+                      <p className="text-[10px] font-bold text-brand-secondary uppercase tracking-widest">Location</p>
+                      <p className="text-sm font-bold text-brand-primary italic font-serif">Sangh Centre</p>
+                   </div>
+                </div>
+                <button className="bg-brand-primary text-white px-10 py-5 rounded-2xl text-[10px] font-bold uppercase tracking-[0.3em] shadow-xl hover:bg-brand-secondary transition-all active:scale-95 group">
+                   Schedule a Visit
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -140,26 +189,33 @@ const MemberSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-cream">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
-        <span className="text-brand-secondary text-xs font-bold uppercase tracking-widest mb-4 block">Team</span>
-        <h2 className="text-3xl md:text-5xl font-bold text-brand-primary mb-16 italic font-serif">Sangh members's</h2>
+    <section className="py-40 bg-cream relative overflow-hidden">
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-brand-primary/5 rounded-full blur-3xl -mr-48 -mb-48" />
+      <div className="max-w-7xl mx-auto px-4 text-center">
+        <div className="space-y-6 mb-24">
+          <span className="text-brand-secondary text-[10px] font-bold uppercase tracking-[0.4em] block">Our Leadership</span>
+          <h2 className="text-4xl md:text-7xl font-bold text-brand-primary italic font-serif">Management Committee</h2>
+          <div className="w-24 h-1 bg-brand-secondary mx-auto rounded-full" />
+        </div>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {members.map((member, i) => (
             <motion.div 
               key={i} 
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="group"
+              transition={{ delay: i * 0.1 }}
+              className="bg-white p-3 rounded-[3rem] shadow-2xl border border-slate-50 group hover:-translate-y-4 transition-all duration-500"
             >
-              <div className="mb-6 relative overflow-hidden rounded-2xl aspect-[4/5] shadow-lg">
-                <img src={member.img} alt={member.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" />
-                <div className="absolute inset-0 bg-brand-primary/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="mb-8 relative overflow-hidden rounded-[2.5rem] aspect-[4/5] shadow-lg">
+                <img src={member.img} alt={member.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
+                <div className="absolute inset-0 bg-brand-primary/10 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
-              <h4 className="text-xl font-bold text-brand-primary mb-1">{member.name}</h4>
-              <p className="text-brand-secondary text-xs font-bold uppercase tracking-widest">{member.role}</p>
+              <div className="pb-10 px-6">
+                 <span className="text-brand-secondary text-[10px] font-bold uppercase tracking-[0.3em] mb-3 block">{member.role}</span>
+                 <h4 className="text-2xl font-bold text-brand-primary italic font-serif ">{member.name}</h4>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -191,7 +247,7 @@ export default function Home() {
       {/* Video/Featured Section - matching Image 18/20 */}
       <section className="relative h-[600px] w-full group cursor-pointer overflow-hidden">
         <img 
-          src="https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=2673&auto=format&fit=crop" 
+          src="https://images.unsplash.com/photo-1544013511-fb06d15668b5?q=80&w=2670&auto=format&fit=crop" 
           className="w-full h-full object-cover brightness-[0.4] transition-transform duration-[10s] group-hover:scale-105" 
           alt="Featured Background"
         />
@@ -229,21 +285,21 @@ export default function Home() {
                </h2>
             </div>
             
-            <div className="space-y-6">
+            <div className="space-y-8">
               {[
-                { title: "Mahavir Swami Bhagwan Janm Kalyanak", date: "Nov 15, 2024 @ 10:00 AM", desc: "A celebration of the birth kalyanak of Lord Mahavira with puja and spiritual discourses." },
-                { title: "VJSS Volunteer Anumodna", date: "Dec 05, 2024 @ 06:00 PM", desc: "Expressing gratitude to our dedicated volunteers who support the Sangh's activities year-round." },
-                { title: "Samuh Samayik & Pratikraman", date: "Dec 20, 2024 @ 07:00 AM", desc: "Join us for a collective spiritual practice focusing on self-reflection and purification." }
+                { title: "Mahavir Swami Bhagwan Janm Kalyanak", date: "Nov 15, 2024 @ 10:00 AM", desc: "A celebration of the birth kalyanak of Lord Mahavira with puja and spiritual discourses.", img: "https://images.unsplash.com/photo-1603566024194-e578453488f7?q=80&w=2670&auto=format&fit=crop" },
+                { title: "VJSS Volunteer Anumodna", date: "Dec 05, 2024 @ 06:00 PM", desc: "Expressing gratitude to our dedicated volunteers who support the Sangh's activities year-round.", img: "https://images.unsplash.com/photo-1544367567-002fcb03541f?q=80&w=2720&auto=format&fit=crop" },
+                { title: "Samuh Samayik & Pratikraman", date: "Dec 20, 2024 @ 07:00 AM", desc: "Join us for a collective spiritual practice focusing on self-reflection and purification.", img: "https://images.unsplash.com/photo-1528319725582-ddc096101511?q=80&w=2636&auto=format&fit=crop" }
               ].map((event, i) => (
                 <motion.div 
                   key={i} 
                   initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  className="flex flex-col md:flex-row bg-white rounded-3xl overflow-hidden shadow-xl border border-slate-100 hover:border-brand-secondary/30 transition-all group"
+                  className="flex flex-col md:flex-row bg-white rounded-[2.5rem] overflow-hidden shadow-2xl border border-slate-100 hover:border-brand-secondary/30 transition-all group"
                 >
                    <div className="w-full md:w-2/5 aspect-[16/10] md:aspect-auto relative overflow-hidden">
                       <img 
-                        src={`https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=2673&auto=format&fit=crop`} 
+                        src={event.img} 
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                         alt={event.title}
                       />
@@ -312,11 +368,42 @@ export default function Home() {
         </div>
       </section>
 
-      <MemberSection />
-      
-      {/* Donation Progress Section - matching Image 1 */}
-      <section className="py-32 bg-white px-4">
-         <div className="max-w-5xl mx-auto text-center mb-20 space-y-4">
+      {/* Gallery Section - Life at Sangh */}
+      <section className="py-32 bg-cream overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4">
+           <div className="flex flex-col md:flex-row justify-between items-end gap-10 mb-20">
+              <div className="space-y-6">
+                 <span className="text-brand-secondary font-bold uppercase tracking-[0.4em] text-[10px]">Moments</span>
+                 <h2 className="text-4xl md:text-6xl font-bold text-brand-primary italic font-serif">Life at the Sangh</h2>
+                 <div className="w-24 h-1 bg-brand-secondary rounded-full" />
+              </div>
+              <Link to="/gallery" className="text-[10px] font-bold text-brand-primary uppercase tracking-[0.3em] hover:text-brand-secondary transition-colors underline underline-offset-8">Explore All Photos</Link>
+           </div>
+           
+           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { img: "https://images.unsplash.com/photo-1548013146-72479768bbaa?q=80&w=2673&auto=format&fit=crop", span: "row-span-2 col-span-2" },
+                { img: "https://images.unsplash.com/photo-1544367567-002fcb03541f?q=80&w=2720&auto=format&fit=crop", span: "col-span-1" },
+                { img: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=2599&auto=format&fit=crop", span: "col-span-1" },
+                { img: "https://images.unsplash.com/photo-1528319725582-ddc096101511?q=80&w=2636&auto=format&fit=crop", span: "col-span-2" }
+              ].map((item, i) => (
+                <motion.div 
+                  key={i}
+                  whileHover={{ scale: 0.98 }}
+                  className={cn("rounded-[2rem] overflow-hidden shadow-2xl relative group cursor-pointer", item.span)}
+                >
+                   <img src={item.img} className="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" alt="Gallery" />
+                   <div className="absolute inset-0 bg-brand-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                      <span className="text-white text-3xl">✨</span>
+                   </div>
+                </motion.div>
+              ))}
+           </div>
+        </div>
+      </section>
+      {/* Donation Progress Section */}
+      <section className="py-32 bg-white flex flex-col space-y-20">
+         <div className="max-w-5xl mx-auto text-center space-y-4">
             <span className="text-brand-secondary text-[10px] font-bold uppercase tracking-[0.4em] block">Make a Difference</span>
             <h2 className="text-3xl md:text-6xl font-bold text-brand-primary italic font-serif">Donate Us To Help</h2>
             <div className="w-24 h-1 bg-brand-secondary mx-auto rounded-full" />
